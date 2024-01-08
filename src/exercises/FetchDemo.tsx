@@ -61,8 +61,9 @@ export default function FetchDemo1({ title }: BaseProps) {
       <h2>{title}</h2>
       <p style={{ fontStyle: "italic" }}>
         This part requires the server mentioned in the exercise. The URL used on this
-        deployed version still points to localhost, so if you start the SERVER_URL as
-        explained in the exercise, it will work
+        deployed version still points to localhost, so if you have cloned and started the
+        mocker-server as explained in the exercise (<code>npm run start-slow</code>), it
+        will work
       </p>
       <button onClick={fetchNextUser}>Next User</button>
       {loading ? <h3>Loading...</h3> : <p>{JSON.stringify(user)}</p>}
