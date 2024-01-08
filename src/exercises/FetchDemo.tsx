@@ -48,6 +48,7 @@ export default function FetchDemo1({ title }: BaseProps) {
         setLoading(false);
         setUser(user);
       })
+      .catch(() => alert("Could not fetch, is the API-server running?"))
       .finally(() => setLoading(false));
     return () => {
       console.log("cleaning up");
@@ -58,6 +59,11 @@ export default function FetchDemo1({ title }: BaseProps) {
   return (
     <>
       <h2>{title}</h2>
+      <p style={{ fontStyle: "italic" }}>
+        This part requires the server mentioned in the exercise. The URL used on this
+        deployed version still points to localhost, so if you start the SERVER_URL as
+        explained in the exercise, it will work
+      </p>
       <button onClick={fetchNextUser}>Next User</button>
       {loading ? <h3>Loading...</h3> : <p>{JSON.stringify(user)}</p>}
       {/* {user && JSON.stringify(user)} */}
