@@ -1,0 +1,48 @@
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+button {
+  background-color: #008CBA; /* Green */
+  border: none;
+  border-radius: 4px;
+  color: white;
+  padding: 5px 5px;
+  margin: 3px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 11px;
+}
+
+button:hover {
+  background-color:lightblue;
+  color: white;
+}
+
+
+.simple-table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+}
+
+.simple-table th,
+.simple-table td {
+    padding: 0.25rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.simple-table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.simple-table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
