@@ -1,37 +1,33 @@
 import { BaseProps } from "../types";
-import { User, users as usersDB } from "../data/data";
-import { useState } from "react";
+import {getUsers,addEditUser as addEdit,deleteUser,getUser, User  } from "../data/dataFetcher";
+import { useEffect, useState } from "react";
 import UserTableWithButtons from "../components/UserTableWithButtons";
-import UserFormControlled from "../components/userFormControlled";
-import { useHeaderContext } from "../components/headerProvider";
+import UserFormControlled, {AddEditDeleteFunction} from "../components/userFormControlled";
 
-export default function LiftingStateV2({ title }: BaseProps) {
-  const [users, setUsers] = useState(usersDB || []);
+export default function LiftingStateRemote({ title }: BaseProps) {
+  const [users, setUsers] = useState<User[]>([]);
   const [userToEdit, setUserToEdit] = useState<User | undefined>(undefined);
-  const { setSubTitle } = useHeaderContext();
-  setSubTitle(title);
 
-  const nextId = Math.floor(Math.random() * 1000);
-    // users.length > 0
-    //   ? users.reduce(
-    //       (max, user) => (user && user.id > max ? user.id : max),
-    //       users[0]?.id
-    //     ) + 1
-    //   : 1;
+  useEffect(() => {
+    getUsers().then((users) => setUsers(users));
+  }, [users]);
 
-  const addEditUser = (user: User) => {
-    if (user.id === -1) {
-      user.id = nextId;
-      setUsers((prev) => [...prev, user]);
-    } else {
-      setUsers((prev) =>
-        prev.map((existingUser) => (existingUser.id === user.id ? user : existingUser))
-      );
+  //Calculate the next id
+
+  const addEditUser:AddEditDeleteFunction = async (user,isDelete) => {
+    if(isDelete){
+      await deleteUser(user.id);
     }
+    else{
+      await addEdit(user);
+    }
+    //To re-render the table
+    console.log("Re-render");
+    getUsers().then((users) => setUsers(users)); 
   };
 
-  const editUser = (id: number) => {
-    const user = users.find((u) => u.id === id);
+  const editUser = async (id: number) => {
+    const user = await getUser(id);
     setUserToEdit(user);
   };
 

@@ -1,10 +1,16 @@
+import { useEffect, useState } from "react";
 import { User } from "../data/data";
 type UserTableProps = { users: User[]; editUser: (userId: number) => void };
 
 export default function UserTableWithButtons({ users, editUser }: UserTableProps) {
+  const [usersLocal, setUsersLocal] = useState<User[]>(users);
   const handleEditUser = (userId: number) => {
     editUser(userId);
   };
+
+  useEffect(() => {
+    setUsersLocal(users);
+  }, [users]);
 
   return (
     <>
@@ -19,7 +25,7 @@ export default function UserTableWithButtons({ users, editUser }: UserTableProps
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {usersLocal.map((user) => (
             <tr key={user.id}>
               <td>{user.id}</td>
               <td>{user.name}</td>
@@ -29,7 +35,7 @@ export default function UserTableWithButtons({ users, editUser }: UserTableProps
               <td>{user.isActive ? "Yes" : "No"}</td>
               <td>
                 <button
-                  onClick={() => handleEditUser(user.id)}
+                  onClick={() => handleEditUser(user.id||-1)}
                   className="btn btn-secondary btn-sm "
                 >
                   Edit

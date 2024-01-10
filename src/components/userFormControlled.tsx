@@ -1,31 +1,28 @@
-
 import { BaseProps } from "../types";
-import { FormEvent, useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, MouseEvent } from "react";
 import { User } from "../data/data";
 
+export type AddEditDeleteFunction = (user: User, isDelete: boolean | undefined) => void;
+
 type UserFormProps = BaseProps & {
-  onSubmitUser: (user: User) => void;
+  onSubmitUser: AddEditDeleteFunction;
   defaultUser: User | undefined;
 };
 
+const emptyUser: User = { name: "", email: "", isActive: false };
 export default function UserFormControlled({
   title,
   onSubmitUser,
   defaultUser,
 }: UserFormProps) {
-  const [user, setUser] = useState<User>({
-    id: -1,
-    name: "",
-    email: "",
-    isActive: false,
-  });
+  const [user, setUser] = useState<User>({ ...emptyUser });
 
   useEffect(() => {
     if (defaultUser) {
       setUser(defaultUser);
     } else {
       // Reset to initial state if defaultUser is undefined
-      setUser({ id: -1, name: "", email: "", isActive: false });
+      setUser({ ...emptyUser });
     }
   }, [defaultUser]);
 
@@ -37,16 +34,19 @@ export default function UserFormControlled({
     }));
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e:MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    onSubmitUser(user);
-    setUser({ id: -1, name: "", email: "", isActive: false });
+    const isDelete = e.currentTarget.id === "delete-btn" ? true : undefined;
+    onSubmitUser(user, isDelete);
+    setUser({ ...emptyUser });
   };
 
   return (
     <>
       <h2>{title}</h2>
-      <form onSubmit={onSubmit}>
+      <form>
+        ID: {user.id}
+        <br />
         First Name: <input name="name" onChange={handleChange} value={user.name} />
         <br />
         Email: <input name="email" onChange={handleChange} value={user.email} />
@@ -58,10 +58,25 @@ export default function UserFormControlled({
           onChange={handleChange}
           checked={user.isActive}
         />
-        <br />
-        <button>{user.id == -1 ? "Add User" : "Update User"}</button>
-        <p style={{ fontSize: "small" }}>{JSON.stringify(user)}</p>
       </form>
+      <br />
+      <button onClick={onSubmit}>{!user.id ? "Add User" : "Update User"} </button>
+      {user.id && (
+        <button type="button" id="delete-btn" onClick={onSubmit}>
+          Delete User
+        </button>
+      )}
+      {
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setUser({ ...emptyUser });
+          }}
+        >
+          Cancel
+        </button>
+      }
+      <p style={{ fontSize: "small" }}>{JSON.stringify(user)}</p>
     </>
   );
 }

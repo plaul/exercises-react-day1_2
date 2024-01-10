@@ -1,5 +1,5 @@
 export interface User {
-  id: number;
+  id?: number;
   name: string;
   email: string;
   isActive: boolean;
@@ -12,4 +12,3 @@ export const users: User[] = [
   { id: 4, name: "Paige Turner", email: "p.turner@email.com", isActive: false },
   { id: 5, name: "Justin Time", email: "j.time@email.com", isActive: true },
 ];
-

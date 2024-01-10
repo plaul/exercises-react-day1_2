@@ -12,6 +12,8 @@ import LiftingState from "./exercises/LiftingState";
 import { HeaderContext } from "./components/headerProvider";
 import FetchDemo1 from "./exercises/FetchDemo";
 import UseEffectDemo from "./exercises/UseEffectDemo";
+import FetchWithHook from "./exercises/FetchWithHook";
+import LiftingStateRemote from "./exercises/LiftingStateDB";
 
 function App() {
   // const [selected, setSelected] = useState(<></>);
@@ -59,8 +61,10 @@ function App() {
     stateDemo2: <StateDemo2 title="State Demo2" />,
     stateDemo3: <StateDemo3 title="State Demo3" />,
     liftingState: <LiftingState title="Lifting State" />,
+    liftingState2: <LiftingStateRemote title="Lifting State Remote" />,
 
     fetchDemo1: <FetchDemo1 title="Fetching API Data 1" />,
+    fetchDemoHook: <FetchWithHook title="Fetching API Data With a Hook" />,
     useEffectDemo: <UseEffectDemo title="Demonstrating UseEffect" />,
   };
 
@@ -100,7 +104,7 @@ const Buttons = (props: ButtonProps) => {
       <button style={btnStyle} onClick={() => handleSelected("listDemo1")}>
         List demo
       </button>
-     
+
       <button style={btnStyle} onClick={() => handleSelected("eventDemo1")}>
         Event demo1 (ImageButtons)
       </button>
@@ -123,12 +127,15 @@ const Buttons = (props: ButtonProps) => {
       <button style={btnStyle} onClick={() => handleSelected("fetchDemo1")}>
         Fetch Demo
       </button>
+      <button style={btnStyle} onClick={() => handleSelected("fetchDemoHook")}>
+        Fetch With User Defined Hook
+      </button>
       <button style={btnStyle} onClick={() => handleSelected("liftingState")}>
         Lifting State
       </button>
-
-     
-    
+      <button style={btnStyle} onClick={() => handleSelected("liftingState2")}>
+        Lifting State (remote)
+      </button>
     </>
   );
 };

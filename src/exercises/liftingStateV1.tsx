@@ -7,13 +7,13 @@ import UserForm from "../components/UserForm";
 export default function LiftingState({ title }: BaseProps) {
   const [users, setUsers] = useState(usersDB || []);
 
-  const nextId =
-    users.length > 0
-      ? users.reduce(
-          (max, user) => (user && user.id > max ? user.id : max),
-          users[0]?.id
-        ) + 1
-      : 1;
+  const nextId = Math.floor(Math.random() * 1000);
+    // users.length > 0
+    //   ? users.reduce(
+    //       (max, user) => (user && user.id > max ? user.id : max),
+    //       users[0]?.id
+    //     ) + 1
+    //   : 1;
 
   const addUser = (user: User) => {
     user.id = nextId;

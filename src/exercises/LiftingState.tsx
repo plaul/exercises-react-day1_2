@@ -2,26 +2,29 @@ import { BaseProps } from "../types";
 import { User, users as usersDB } from "../data/data";
 import { useState } from "react";
 import UserTableWithButtons from "../components/UserTableWithButtons";
-import UserFormControlled from "../components/userFormControlled";
-import { useHeaderContext } from "../components/headerProvider";
+import UserFormControlled,{AddEditDeleteFunction} from "../components/userFormControlled";
 
 export default function LiftingState({ title }: BaseProps) {
-  const [users, setUsers] = useState(usersDB || []);
+  const [users, setUsers] = useState(usersDB);
   const [userToEdit, setUserToEdit] = useState<User | undefined>(undefined);
-  const { setSubTitle } = useHeaderContext();
-  setSubTitle(title);
 
   //Calculate the next id
   const nextId =
-    users.length > 0
-      ? users.reduce(
-          (max, user) => (user && user.id > max ? user.id : max),
-          users[0]?.id
-        ) + 1
+    users?.length > 0
+      ? 1 +
+        users.reduce((max, user) => {
+          //We need this check to make Typescript happy, since the type for User defines id as optional
+          if (!user.id || !max) throw new Error();
+          return user && user.id > max ? user.id : max;
+        }, users[0].id || 0)
       : 1;
 
-  const addEditUser = (user: User) => {
-    if (user.id === -1) {
+  const addEditDeleteUser:AddEditDeleteFunction = (user,isDelete) => {
+    if(isDelete){
+      setUsers((prev) => prev.filter((u) => u.id !== user.id));
+      return;
+    }
+    if (!user.id) {
       user.id = nextId;
       setUsers((prev) => [...prev, user]);
     } else {
@@ -59,7 +62,7 @@ export default function LiftingState({ title }: BaseProps) {
           <div style={{ flex: 2, border: "solid 1px gray", padding: 10 }}>
             <UserFormControlled
               title="Add User"
-              onSubmitUser={addEditUser}
+              onSubmitUser={addEditDeleteUser}
               defaultUser={userToEdit}
             />
           </div>
