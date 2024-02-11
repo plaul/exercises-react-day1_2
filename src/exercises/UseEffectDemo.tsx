@@ -26,7 +26,11 @@ export default function UseEffectDemo({ title }: BaseProps) {
   return (
     <>
       <h2>{title}</h2>
-      
+      <div className="title">{title}</div>
+      <div className="info">
+        Exercise that demonstrates how to use the <b>useEffect hook</b>,  without a dependency array (rarely used), with an empty dependency array, with a non-empty dependency array and how to use the cleanup function
+      </div>
+  
       <p>{count}</p>
       <button onClick={() => setShouldCount((prev) => !prev)}>
         {shouldCount ? "Stop Count" : "Start Count"}

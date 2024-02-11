@@ -48,7 +48,9 @@ export default function FetchDemo1({ title }: BaseProps) {
         setLoading(false);
         setUser(user);
       })
-      .catch(() => alert("Could not fetch, is the API-server running?"))
+      .catch(() => {
+        alert("Could not fetch, is the API-server running?");
+      })
       .finally(() => setLoading(false));
     return () => {
       console.log("cleaning up");
@@ -58,8 +60,16 @@ export default function FetchDemo1({ title }: BaseProps) {
 
   return (
     <>
-      <h2>{title}</h2>
-      <p style={{ fontStyle: "italic" }}>
+      <div className="title">{title}</div>
+      <div className="info">
+        Exercise that demonstrates basic use of fetch to interact with external endpoints.{" "}
+        <br />
+        It also demonstrates when you need useEffect, when not, and why
+        <br />
+        Finally it should demonstrate a way to deal with endpoints that are "slow"
+      </div>
+
+      <p style={{ fontStyle: "italic", color: "red" }}>
         This part requires the server mentioned in the exercise. The URL used on this
         deployed version still points to localhost, so if you have cloned and started the
         mocker-server as explained in the exercise (<code>npm run start-slow</code>), it

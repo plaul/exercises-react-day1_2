@@ -11,7 +11,6 @@ type UserFormProps = BaseProps & {
 
 const emptyUser: User = { name: "", email: "", isActive: false };
 export default function UserFormControlled({
-  title,
   onSubmitUser,
   defaultUser,
 }: UserFormProps) {
@@ -34,7 +33,7 @@ export default function UserFormControlled({
     }));
   };
 
-  const onSubmit = (e:MouseEvent<HTMLButtonElement>) => {
+  const onSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const isDelete = e.currentTarget.id === "delete-btn" ? true : undefined;
     onSubmitUser(user, isDelete);
@@ -43,7 +42,7 @@ export default function UserFormControlled({
 
   return (
     <>
-      <h2>{title}</h2>
+      <h2>{!user.id ? "Add User" : "Edit User"}</h2>
       <form>
         ID: {user.id}
         <br />

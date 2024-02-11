@@ -26,7 +26,10 @@ export default function StateDemo1({ title }: BaseProps) {
 */
   return (
     <>
-      <h2>{title}</h2>
+       <div className="title">{title}</div>
+      <div className="info">
+        Simple React First Day exercise that demonstrates state-handling with the useState Hook
+      </div>
 
       <button onClick={() => setCount((prev) => prev + 1)}>Increment</button>
       <button onClick={() => setCount((prev) => prev - 1)}> Decrement</button>

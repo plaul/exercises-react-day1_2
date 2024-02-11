@@ -5,7 +5,7 @@ type ImageButtonProps = {
 
 export default function ImageButton({ image, onClick }: ImageButtonProps) {
   return (
-    <button onClick={onClick} style={{ border: "none", background: "none" }}>
+    <button onClick={onClick} className="imageButton">
       <img
         style={{ width: "50px", height: "50px"}}
         src={image}

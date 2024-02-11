@@ -21,7 +21,10 @@ export default function StateDemo2({ title }: BaseProps) {
 
   return (
     <>
-      <h2>{title}</h2>
+      <div className="title">{title}</div>
+      <div className="info">
+        Exercise that demonstrates how update state implemented with Objects, using the useState Hook
+      </div>
       <div>
         <p>ID: {user.id}</p>{" "}
       </div>

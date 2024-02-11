@@ -49,7 +49,9 @@ export default function LiftingStateRemote({ title }: BaseProps) {
         </div>
         <div style={{ display: "flex", width: "100%" }}>
           <div style={{ flex: 3, marginRight: 20, border: "solid 1px gray" }}>
+            {users.length>0 ?
             <UserTableWithButtons users={users} editUser={editUser} />
+            : <p>Loading...</p>}
           </div>
           <div style={{ flex: 2, border: "solid 1px gray", padding: 10 }}>
             <UserFormControlled

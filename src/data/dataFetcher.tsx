@@ -1,6 +1,6 @@
 const SERVER_URL = "http://localhost:8000/users";
 const DELAY = 1000;
-const CACHE_EXPIRATION_MS = 300000;
+const CACHE_EXPIRATION_MS = 15000;
 const HTTP_METHODS = {
   GET: "GET",
   POST: "POST",
@@ -15,7 +15,7 @@ export interface User {
   isActive: boolean;
 }
 let users: User[] = [];
-let lastFetchTimestamp: number|null = null; // Timestamp of the last fetch
+let lastFetchTimestamp: number | null = null; // Timestamp of the last fetch
 
 function fetchApi(url: string, options: object): Promise<any> {
   return fetch(url, options).then((res) => {
@@ -39,13 +39,14 @@ function makeOptions(method: string, body?: object) {
 }
 
 export const addEditUser = async (user: User): Promise<User> => {
-  const method = user.id  ? HTTP_METHODS.PUT : HTTP_METHODS.POST;
-  const userId = user.id  ? `/${user.id}` : "";
+  const method = user.id ? HTTP_METHODS.PUT : HTTP_METHODS.POST;
+  const userId = user.id ? `/${user.id}` : "";
   const options = makeOptions(method, user);
 
   const result = await fetchApi(`${SERVER_URL}${userId}?delay=${DELAY}`, options);
-  users =
-    user.id  ? users.map((u) => (u.id === user.id ? result : u)) : [...users, result];
+  users = user.id
+    ? users.map((u) => (u.id === user.id ? result : u))
+    : [...users, result];
   return result;
 };
 
@@ -61,8 +62,8 @@ export const getUsers = async (): Promise<User[]> => {
   return users;
 };
 
-export const deleteUser = async (id: number|undefined): Promise<void> => {
-  if(!id) throw new Error("Id is undefined");
+export const deleteUser = async (id: number | undefined): Promise<void> => {
+  if (!id) throw new Error("Id is undefined");
   const options = makeOptions(HTTP_METHODS.DELETE);
   await fetchApi(`${SERVER_URL}/${id}?delay=${DELAY}`, options);
   users = users.filter((user) => user.id !== id);

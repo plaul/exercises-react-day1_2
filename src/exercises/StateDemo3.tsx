@@ -7,14 +7,13 @@ type Props = BaseProps;
 
 export default function StateDemo3({ title }: Props) {
   const [users, setUsers] = useState<User[]>(usersFromDB || []);
-
   const nextId =
     users?.length > 0
       ? 1 +
         users.reduce((max, user) => {
           //We need this check to make Typescript happy, since the type for User defines id as optional
           if (!user.id || !max) throw new Error();
-          return user && user.id > max ? user.id : max;
+          return  user.id > max ? user.id : max;
         }, users[0].id || 0)
       : 1;
 
@@ -28,7 +27,10 @@ export default function StateDemo3({ title }: Props) {
 
   return (
     <>
-      <h2>{title}</h2>
+      <div className="title">{title}</div>
+      <div className="info">
+        Exercise that demonstrates how update state implemented with Arrays, using the useState Hook
+      </div>
       <UserTable users={users} />
       <UserForm title="Add User" onSubmitUser={onSubmitUser} />
     </>

@@ -14,15 +14,16 @@ import FetchDemo1 from "./exercises/FetchDemo";
 import UseEffectDemo from "./exercises/UseEffectDemo";
 import FetchWithHook from "./exercises/FetchWithHook";
 import LiftingStateRemote from "./exercises/LiftingStateDB";
+import ContextDemoApp from "./exercises/Context";
 
 function App() {
   // const [selected, setSelected] = useState(<></>);
 
   const [selectedView, setSelectedView] = useState("info");
-  const { subTitle, setSubTitle } = useContext(HeaderContext);
+  
 
   function handleSelected(selected: string) {
-    setSubTitle("Please provide a title");
+
     setSelectedView(selected);
   }
   const buttonStyle = {
@@ -62,10 +63,10 @@ function App() {
     stateDemo3: <StateDemo3 title="State Demo3" />,
     liftingState: <LiftingState title="Lifting State" />,
     liftingState2: <LiftingStateRemote title="Lifting State Remote" />,
-
     fetchDemo1: <FetchDemo1 title="Fetching API Data 1" />,
     fetchDemoHook: <FetchWithHook title="Fetching API Data With a Hook" />,
-    useEffectDemo: <UseEffectDemo title="Demonstrating UseEffect" />,
+    useEffectDemo: <UseEffectDemo title="Demonstrating useEffect" />,
+    context: <ContextDemoApp title="Demonstrating useContext" />,
   };
 
   return (
@@ -73,7 +74,7 @@ function App() {
       <div style={outerDivStyle}>
         <div style={headerStyle}>
           <h2>React Exercises</h2>
-          <h4 style={{ color: "darkolivegreen" }}>{subTitle}</h4>
+          {/* <h4 style={{ color: "darkolivegreen" }}>{subTitle}</h4> */}
         </div>
         <div style={{ display: "flex" }}>
           <div style={{ flex: 1, padding: 10 }}>
@@ -135,6 +136,9 @@ const Buttons = (props: ButtonProps) => {
       </button>
       <button style={btnStyle} onClick={() => handleSelected("liftingState2")}>
         Lifting State (remote)
+      </button>
+      <button style={btnStyle} onClick={() => handleSelected("context")}>
+        Context demo - useContext
       </button>
     </>
   );
