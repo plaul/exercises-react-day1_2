@@ -1,4 +1,4 @@
-import { useState, useContext, CSSProperties } from "react";
+import { useState,  CSSProperties } from "react";
 import "./App.css";
 import Propsdemo1 from "./exercises/propsdemo1";
 import ListDemo from "./exercises/ListDemo";

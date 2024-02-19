@@ -5,7 +5,6 @@ import App from "./App.tsx";
 //import App from "./App3.tsx";
 import "./App.css";
 import "./index.css";
-import RoleContextProvider from "./context/RoleContextProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
