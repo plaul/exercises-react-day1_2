@@ -24,7 +24,7 @@
   },
   "include": [
     "src",
-    "src/data/data.tsx"
+    "src/data/data.ts"
   ],
   "references": [
     {

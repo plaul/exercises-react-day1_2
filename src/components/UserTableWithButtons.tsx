@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { User } from "../data/data";
+
 type UserTableProps = { users: User[]; editUser: (userId: number) => void };
 
 export default function UserTableWithButtons({ users, editUser }: UserTableProps) {
   const [usersLocal, setUsersLocal] = useState<User[]>(users);
+
+  //Implement a function that will handle the edit button click
   const handleEditUser = (userId: number) => {
     editUser(userId);
   };
@@ -34,9 +37,7 @@ export default function UserTableWithButtons({ users, editUser }: UserTableProps
               </td>
               <td>{user.isActive ? "Yes" : "No"}</td>
               <td>
-                <button
-                  onClick={() => handleEditUser(user.id||-1)}
-                  className="btn btn-secondary btn-sm "
+                <button  onClick={() => handleEditUser(user.id || -1)} 
                 >
                   Edit
                 </button>

@@ -10,6 +10,7 @@ type UserFormProps = BaseProps & {
 };
 
 const emptyUser: User = { name: "", email: "", isActive: false };
+
 export default function UserFormControlled({
   onSubmitUser,
   defaultUser,
@@ -42,7 +43,7 @@ export default function UserFormControlled({
 
   return (
     <>
-      <h2>{!user.id ? "Add User" : "Edit User"}</h2>
+      <h2 style={{margin:0}}>{!user.id ? "Add User" : "Edit User"}</h2>
       <form>
         ID: {user.id}
         <br />
@@ -75,7 +76,7 @@ export default function UserFormControlled({
           Cancel
         </button>
       }
-      <p style={{ fontSize: "small" }}>{JSON.stringify(user)}</p>
+      {/* <p style={{ fontSize: "small" }}>{JSON.stringify(user)}</p> */}
     </>
   );
 }

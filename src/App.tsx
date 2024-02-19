@@ -9,7 +9,6 @@ import StateDemo1 from "./exercises/StateDemo1";
 import StateDemo2 from "./exercises/StateDemo2";
 import StateDemo3 from "./exercises/StateDemo3";
 import LiftingState from "./exercises/LiftingState";
-import { HeaderContext } from "./components/headerProvider";
 import FetchDemo1 from "./exercises/FetchDemo";
 import UseEffectDemo from "./exercises/UseEffectDemo";
 import FetchWithHook from "./exercises/FetchWithHook";

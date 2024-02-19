@@ -1,36 +1,34 @@
-/* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState, SetStateAction } from "react";
 import { BaseProps } from "../types";
+import RoleContextProvider, {useRole} from "../context/RoleContextProvider";
 
-interface RoleContextType {
-  role: string;
-  setRole: React.Dispatch<SetStateAction<string>>;
-}
 const topWidth = 220;
-const RoleContext = createContext<RoleContextType>({ role: "", setRole: () => {} });
-//const RoleContext = createContext(null);
 
-function RoleContextProvider({ children }: BaseProps) {
-  const [role, setRole] = useState("anonymous");
-  return (
-    <RoleContext.Provider value={{ role, setRole }}>{children}</RoleContext.Provider>
-  );
-}
-
+// export default function ContextDemoApp({ title }: BaseProps) {
+//   return (
+//     <>
+//       <h2>{title}</h2>
+//       <Root />
+//    </>
+//   );
+// }
 export default function ContextDemoApp({ title }: BaseProps) {
   return (
-    <RoleContextProvider title={title}>
+    <>
+    <div className="title">{title}</div>
+    <RoleContextProvider>
       <Root />
     </RoleContextProvider>
+    </>
   );
 }
 
 function Root() {
-  // const { role } = useContext(RoleContext);
+  
+  const { role } = useRole();
   return (
     <div className="root-box">
-      <h2>Root</h2>
-      {/* <p>Role: {role}</p> */}
+      <h2 style={{margin:0}}>Root</h2>
+      <p style={{margin:0}}>Role: {role}</p>
       <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
         <A />
         <D />
@@ -40,7 +38,6 @@ function Root() {
 }
 
 function A() {
-  //const role = useContext(RoleContext); // Using useContext to access the theme
   return (
     <div className="box" style={{ width: topWidth }}>
       <h2>A</h2>
@@ -50,7 +47,7 @@ function A() {
 }
 
 function B() {
-  const { role } = useContext(RoleContext);
+  const { role } = useRole();
   return (
     <div className="box" style={{ width: topWidth - 20 }}>
       <h2>B</h2>
@@ -69,7 +66,7 @@ function C() {
 }
 
 function D() {
-  const { role, setRole } = useContext(RoleContext); // Using useContext to access the theme
+  const { role, setRole } = useRole(); // Using useContext to access the theme
   return (
     <div className="box" style={{ width: topWidth }}>
       <h2 style={{ margin: 0 }}>D</h2>
@@ -94,7 +91,7 @@ function E() {
 }
 
 function F() {
-  const { role } = useContext(RoleContext);
+  const { role } = useRole();
   return (
     <div className="box" style={{ width: topWidth - 40 }}>
       <h2>F</h2>

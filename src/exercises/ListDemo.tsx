@@ -13,7 +13,7 @@ export default function ListDemo({ title }: Props) {
       {/** Render all users in a table RIGHT HERE */}
 
       {/**After that refactor the table-part into a separate Component and use like this */}
-      <UserTable users={users} />
+      <UserTable users={users}  />
     </>
   );
 }
